@@ -29,6 +29,7 @@ there may be nuances in the support of some platforms. read about it here: https
 * desktop_64 (default)
 * desktop_32
 * raspberry_pi_64
+* raspberry_pi_32 (temporarily unavailable)
 * orange_pi_zero3
 
 ## supported application types
@@ -48,10 +49,20 @@ you have to pass one of them. but not more than one
 * --mode - auto/graphic/console select one of the launch modes for your application. By default, the mode is automatically defined as graphical for binary files and text for shell scripts. but it's better to specify it explicitly.
 * --boot-logo - you can set a custom boot logo .png
 * --chroot - you can specify a chroot script to modify the system during the image build stage.
-* --wifi-name - the name of the wifi network for automatic connection (NOT IMPLEMENTED AT THE MOMENT)
-* --wifi-password - the password of the wifi network for automatic connection (NOT IMPLEMENTED AT THE MOMENT)
+* --packages - add additional packages to the system. separation by ","
+* --wifi-name - the name of the wifi network for automatic connection
+* --wifi-password - the password of the wifi network for automatic connection
+* --wifi-security - the security of the wifi network for automatic connection. there is usually no need to change this.
 * --output - output path to the boot image
 * --syslbuild - the path to the syslbuild directory. it will be detected automatically if your syslbuild is installed using the standard path in /opt/syslbuild
+
+## wifi-security variants
+please note that this field must correspond to the actual type of encryption of your network  
+if you have selected an encryption mode that requires a password (for example, default) and the password is not specified, an attempt will be made to connect without encryption  
+* wpa-psk (default)
+* sae
+* owe - password-free encryption
+* none - without encryption
 
 ## flags
 * --root-privileges - the application in the image will have root privileges
@@ -59,6 +70,13 @@ you have to pass one of them. but not more than one
 * --multi-file - then not only the application file will be added to the image, but also all files from its directory. use carefully so as not to add unnecessary files to the image
 * --debug - enable the kernel log and root shell at UART0 115200
 * --clear-cache - cleans up the cache before building
+* --x11-session - enables x11 graphics session mode
+* --fullscreen-logo - makes the bootlogo fullscreen
+* --white-logo - makes the background of the bootlogo white
+
+## examples
+* desktop, google, web kiosk: mkbootable --web https://google.com --output kiosk_google.img
+* raspberry pi 64, google, web kiosk: mkbootable --platform raspberry_pi_64 --web https://google.com --output kiosk_google.img
 
 ## used projects
 * super-kiosk-browser: https://github.com/igorkll/super-kiosk-browser - the browser used in the web kiosk mode
