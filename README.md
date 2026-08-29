@@ -1,4 +1,4 @@
-# mkbootable (BETA)
+# mkbootable
 ![preview](https://raw.githubusercontent.com/igorkll/mkbootable/refs/heads/main/preview.png)  
 create a bootable linux image from your application  
 there will be nothing superfluous in the boot image created from your application. no system hotkeys. no visual artifacts during loading like the flashing VT. just your logo followed immediately by the app  
@@ -16,7 +16,7 @@ the program cache is located at the path: /home/$USER/.mkbootable and can take u
 * download the syslbuild release (NOT THE REPOSITORY BRANCH): https://github.com/igorkll/syslbuild/releases
 * unpack it in a convenient place
 * launch install.sh from root
-* wait for the installation process to finish (it can take up to 4 hours)
+* wait for the installation process to finish (it can take up to 2 hours)
 * the unpacked files can now be deleted
 ### supported host systems
 recommended OS: Ubuntu 24.04 LTS (Noble Numbat)  
@@ -32,6 +32,13 @@ there may be nuances in the support of some platforms. read about it here: https
 * raspberry_pi_32
 * raspberry_pi_armel
 * orange_pi_zero3
+
+## rootfs.tar.gz architectures support
+* rootfs_64
+* rootfs_32
+* rootfs_arm64
+* rootfs_armhf
+* rootfs_armel
 
 ## supported application types
 * flatpak - the flatpak format package (NOT IMPLEMENTED AT THE MOMENT)
@@ -71,9 +78,11 @@ if you have selected an encryption mode that requires a password (for example, d
 * --multi-file - then not only the application file will be added to the image, but also all files from its directory. use carefully so as not to add unnecessary files to the image
 * --debug - enable the kernel log and root shell at UART0 115200
 * --clear-cache - cleans up the cache before building
-* --x11-session - enables x11 graphics session mode
+* --x11-session - enables x11 graphics session mode (wayland is used by default)
 * --fullscreen-logo - makes the bootlogo fullscreen
 * --white-logo - makes the background of the bootlogo white
+* --no-logo - disable the boot logo. By default, a black screen or uefi logo will appear instead of the logo
+* --enable-bootlogs - enables display of the bootlog on the screen during boot. If the logo isn't disabled, it also allows using the ESC key to hide it and access the logs
 
 ## examples
 * desktop, google, web kiosk: mkbootable --web https://google.com --output kiosk_google.img
