@@ -51,6 +51,7 @@ there may be nuances in the support of some platforms. read about it here: https
 you have to pass one of them. but not more than one  
 * --application - the path to your application's executable file
 * --web - the link to the web page to be displayed in kiosk mode
+* --command - executes any command. please note that by default, it runs in console mode, if you are running a graphical application, then specify this explicitly
 
 ## args
 * --platform - select an available platform from the list (default: desktop_64)
@@ -61,7 +62,7 @@ you have to pass one of them. but not more than one
 * --wifi-name - the name of the wifi network for automatic connection
 * --wifi-password - the password of the wifi network for automatic connection
 * --wifi-security - the security of the wifi network for automatic connection. there is usually no need to change this.
-* --output - output path to the boot image
+* --output - output path to the boot image (set it as "none" to avoid copying the project file after the build. in this case, you can find it on the path "~/.mkbootable/project/output/<architecture>")
 * --syslbuild - the path to the syslbuild directory. it will be detected automatically if your syslbuild is installed using the standard path in /opt/syslbuild
 
 ## wifi-security variants
